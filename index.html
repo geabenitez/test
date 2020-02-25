@@ -44,7 +44,7 @@
       },
       methods: {
         getValue: function (selectedPokemon) {
-          axios.get(`http://pokeapi.co/api/v2/pokemon/${selectedPokemon.name}/`).then(function (response) {
+          axios.get(`https://pokeapi.co/api/v2/pokemon/${selectedPokemon.name}/`).then(function (response) {
             selectedPokemon.image = response.data.sprites.front_default
           })
         }
