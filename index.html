@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Title Page</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="w-screen h-screen flex flex-col justify-center items-center bg-red-500">
+
+  <div id="app" class="flex flex-row">
+    <div class="flex flex-col bg-white p-6 rounded mx-2 w-48 items-center hover:shadow-xl cursor-pointer"
+      v-for="pokemon of pokemons" @click="getValue(pokemon)">
+      <img :src="pokemon.image" alt="" class="rounded-full bg-gray-400 h-24 w-24 mb-4">
+      <span class="font-semibold uppercase text-xl">Descubre</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        pokemons: [
+          {
+            name: "bulbasaur",
+            image: ""
+          },
+          {
+            name: "pikachu",
+            image: ""
+          },
+          {
+            name: "ditto",
+            image: ""
+          }
+        ],
+      },
+      methods: {
+        getValue: function (selectedPokemon) {
+          axios.get(`http://pokeapi.co/api/v2/pokemon/${selectedPokemon.name}/`).then(function (response) {
+            selectedPokemon.image = response.data.sprites.front_default
+          })
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
